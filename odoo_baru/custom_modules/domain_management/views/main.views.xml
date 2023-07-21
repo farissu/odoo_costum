@@ -1,0 +1,81 @@
+<odoo>
+	<data>
+		<record id="domain_main_form" model="ir.ui.view">
+			<field name="name">main_form</field>
+			<field name="model">domain.main</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name" string="Nama Domain" required='1'/>
+							<field name="registrar" string="Registrar" readonly='1' force_save='1'/>
+							<field name="creation_date" string="Start Date" readonly='1' force_save='1'/>
+							<field name="expiration_date" string="Expiration Date" readonly='1' force_save='1'/>
+                            <field name="range_date" string="Due Date" force_save='1'/>
+							<field name="updated_date" string="Last Update" readonly='1' force_save='1'/>
+							<field name="management" string="Management" options="{'no_create': True, 'no_open': True}" />
+							<field name="renewal_status" string="Status Perpanjangan" />
+							<field name="ownership" string="Ownership" options="{'no_create': True, 'no_open': True}"/>
+							<field name="domain_tld" string="Domain TLD" />
+							<field name="hpp_rupiah" string="HPP Rupiah (Rp)" />
+							<field name="hpp_usd" string="HPP USD ($)" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="domain_main_tree" model="ir.ui.view">
+			<field name="name">main_tree</field>
+			<field name="model">domain.main</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" string="Nama Domain" optional="show"/>
+					<field name="registrar" string="Registrar" optional="show"/>
+					<field name="creation_date" string="Start Date" optional="show"/>
+					<field name="expiration_date" string="Expiration Date" optional="show"/>
+					<field name="updated_date" string="Last Update" optional="show"/>
+                    <field name="range_date" string="Due Date" optional="show" decoration-danger="range_date == 'Expired'"/>
+					<field name="management" string="Management" optional="hide"/>
+					<field name="renewal_status" string="Status Perpanjangan" optional="hide"/>
+					<field name="ownership" string="Ownership" optional="show"/>
+					<field name="domain_tld" string="Domain TLD" optional="hide"/>
+					<field name="hpp_rupiah" string="HPP Rupiah (Rp)" optional="hide"/>
+					<field name="hpp_usd" string="HPP USD ($)" optional="hide"/>
+					<!-- <field name="state" string="Status" optional="show" widget="badge" decoration-success="state == 'OK'" decoration-danger="state == 'DOWN'"/> -->
+				</tree>
+			</field>
+		</record>
+
+		<record id="kirim_tele" model="ir.cron">
+			<field name="name">update domain kirim tele</field>
+			<field name="model_id" ref="model_domain_main"/>
+			<field name="type">ir.actions.server</field>
+			<field name="state">code</field>
+			<field name="code">model.kirim_tele()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+		</record>
+
+		<record id="update_domain" model="ir.cron">
+			<field name="name">Update Domain</field>
+			<field name="model_id" ref="model_domain_main"/>
+			<field name="type">ir.actions.server</field>
+			<field name="state">code</field>
+			<field name="code">model.update_domain()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+		</record>
+		
+		<record id="domain_main_action" model="ir.actions.act_window">
+			<field name="name">Domain</field>
+			<field name="res_model">domain.main</field>
+			<field name="view_mode">tree,form,pivot</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('domain_main_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('domain_main_form')})]" />
+		</record>
+		<menuitem id="domain" name="Domain" parent="domain_root" sequence="0" action="domain_main_action" />
+	</data>
+</odoo>
