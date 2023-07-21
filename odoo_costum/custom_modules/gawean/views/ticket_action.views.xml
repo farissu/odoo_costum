@@ -1,0 +1,17 @@
+
+<odoo>
+    <data>
+        <record id="gawean_ticket_action" model="ir.actions.act_window">
+            <field name="name">Gawean</field>
+            <field name="res_model">gawean.ticket</field>
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="help" type="html">
+                <p class="0_view_nocontent_smiling_face">
+                    Belum ada Gawean! (cie)
+                </p>
+            </field>
+        </record>
+
+         <menuitem id="gawean" name="Gawean" parent="domain_root" action="gawean_ticket_action"/>
+    </data>
+</odoo>
