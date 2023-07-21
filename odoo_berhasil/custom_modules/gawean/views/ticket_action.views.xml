@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="gawean_ticket_action" model="ir.actions.act_window">
+            <field name="name">gawean</field>
+            <field name="res_model">gawean.ticket</field>
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="help" type="html">
+                <p class="0_view_nocontent_smiling_face">
+                    Belum ada Gawean! (cie)
+                </p>
+            </field>
+		</record>
+ 		<record id="gawean_ticket_tree" model="ir.ui.view">
+    		<field name="name">Gawean</field>
+    		<field name="model">gawean.ticket</field>
+    		<field name="arch" type="xml">
+    		    <tree>
+    		        <field name="name" string="Nama Server" optional="show"/>
+					<field name="ip_server" string="IP Address" optional="show"/>
+					<field name="status_server" string="Status Server" optional="show"/>
+					<field name="aktif" string="Aktif Sejak" optional="show"/>
+					<!-- <field name="updated_date" string="Last Update" optional="show"/>
+					<field name="hpp_rupiah" string="HPP Rupiah (Rp)" optional="hide"/>
+					<field name="hpp_usd" string="HPP USD ($)" optional="hide"/> -->
+					<!-- <field name="state" string="Status" optional="show" widget="badge" decoration-success="state == 'OK'" decoration-danger="state == 'DOWN'"/> -->
+					
+    		    </tree>
+    		</field>
+		</record>
+		<record id="gawean_ticket_form" model="ir.ui.view">
+    		<field name="name">Gawean</field>
+    		<field name="model">gawean.ticket</field>
+    		<field name="arch" type="xml">
+    		    <form>
+    		        <sheet>
+    		            <group>
+    		                <field name="name" string="Nama Server" required='1'/>
+							<field name="ip_server" string="IP Address" force_save='1'/>
+							<field name="status_server" string="Status Server"/>
+							<field name="aktif" string="Aktif Sejak" force_save='1'/>
+                            <!-- <field name="range_date" string="Due Date" force_save='1'/>
+							<field name="updated_date" string="Last Update" readonly='1' force_save='1'/>
+					
+							<field name="renewal_status" string="Status Perpanjangan" />
+				
+							<field name="domain_tld" string="Domain TLD" />
+							<field name="hpp_rupiah" string="HPP Rupiah (Rp)" />
+							<field name="hpp_usd" string="HPP USD ($)" /> -->
+    		            </group>
+    		        </sheet>
+    		    </form>
+    		</field>
+		</record>
+
+        <menuitem id="gawean" name="Gawean" parent="domain_root" action="gawean_ticket_action"/>
+    </data>
+</odoo>
