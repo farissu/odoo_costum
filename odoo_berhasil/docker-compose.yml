@@ -2,6 +2,9 @@ version: '2'
 services:
   odoo:
     image: odoo:16
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - "7496:8069"
       - "0323:8072"
