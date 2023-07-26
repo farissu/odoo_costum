@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="domain_bot_form" model="ir.ui.view">
+            <field name="name">bot_form</field>
+            <field name="model">domain.bot</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" string="Name" />
+                            <field name="botID" string="Bot ID" />
+                            <field name="chatID" string="Chat ID" />
+                            <field name="aktif" string="Active" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="domain_bot_tree" model="ir.ui.view">
+            <field name="name">bot_tree</field>
+            <field name="model">domain.bot</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Name" />
+                    <field name="botID" string="Bot ID" />
+                    <field name="chatID" string="Chat ID" />
+                    <field name="aktif" string="Active"/>
+                </tree>
+            </field>
+        </record>
+        <record id="domain_bot_action" model="ir.actions.act_window">
+            <field name="name">Bot Telegram</field>
+            <field name="res_model">domain.bot</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('domain_bot_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('domain_bot_form')})]" />
+        </record>
+        <menuitem id="bot" name="Bot Telegram" parent="domain_config" sequence="1" action="domain_bot_action" />
+    </data>
+</odoo>
