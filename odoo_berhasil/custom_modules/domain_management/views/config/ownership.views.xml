@@ -1,0 +1,35 @@
+<odoo>
+	<data>
+		<record id="domain_ownership_form" model="ir.ui.view">
+			<field name="name">ownership_form</field>
+			<field name="model">domain.ownership</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name" string="Ownership" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="domain_ownership_tree" model="ir.ui.view">
+			<field name="name">ownership_tree</field>
+			<field name="model">domain.ownership</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" string="Ownership" />
+				</tree>
+			</field>
+		</record>
+		<record id="domain_ownership_action" model="ir.actions.act_window">
+			<field name="name">Ownership</field>
+			<field name="res_model">domain.ownership</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('domain_ownership_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('domain_ownership_form')})]" />
+		</record>
+		<menuitem id="ownership" name="Ownership" parent="domain_config" sequence="0" action="domain_ownership_action" />
+	</data>
+</odoo>

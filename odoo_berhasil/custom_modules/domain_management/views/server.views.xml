@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+        <record id="domain_server_action" model="ir.actions.act_window">
+            <field name="name">server</field>
+            <field name="res_model">domain.server</field>
+            <field name="view_mode">tree,kanban,form,graph</field>
+            <field name="help" type="html">
+                <p class="0_view_nocontent_smiling_face">
+                    Belum ada Gawean! (cie)
+                </p>
+            </field>
+		</record>
+ 		<record id="domain_server_tree" model="ir.ui.view">
+    		<field name="name">server</field>
+    		<field name="model">domain.server</field>
+    		<field name="arch" type="xml">
+    		    <tree>
+    		        <field name="name_server" string="Nama Server" optional="show"/>
+					<field name="host_name" string="HostName" optional="show"/>
+					<field name="username" string="username" optional="show"  password="True" />
+					<field name="port" string="port" optional="show"/>
+					<field name="password" string="password" optional="show" password="True" />
+					<!-- <field name="updated_date" string="Last Update" optional="show"/>
+					<field name="hpp_rupiah" string="HPP Rupiah (Rp)" optional="hide"/>
+					<field name="hpp_usd" string="HPP USD ($)" optional="hide"/> -->
+					<!-- <field name="state" string="Status" optional="show" widget="badge" decoration-success="state == 'OK'" decoration-danger="state == 'DOWN'"/> -->
+					
+    		    </tree>
+    		</field>
+		</record>
+		<record id="domain_server_form" model="ir.ui.view">
+    		<field name="name">server</field>
+    		<field name="model">domain.server</field>
+    		<field name="arch" type="xml">
+    		    <form>
+    		        <sheet>
+    		            <group>
+    		                <field name="name_server" string="Nama Server" required='1'/>
+							<field name="host_name" string="HostName" force_save='1'/>
+							<field name="username" string="username" force_save='1'  password="True" />
+							<field name="port" string="port" force_save='1'/>
+							<field name="password" string="password" force_save='1'  password="True" />
+                            <!-- <field name="range_date" string="Due Date" force_save='1'/>
+							<field name="updated_date" string="Last Update" readonly='1' force_save='1'/>
+					
+							<field name="renewal_status" string="Status Perpanjangan" />
+				
+							<field name="domain_tld" string="Domain TLD" />
+							<field name="hpp_rupiah" string="HPP Rupiah (Rp)" />
+							<field name="hpp_usd" string="HPP USD ($)" /> -->
+    		            </group>
+    		        </sheet>
+    		    </form>
+    		</field>
+		</record>
+		<record id="kirim_tele_server" model="ir.cron">
+			<field name="name">Update Data Server</field>
+			<field name="model_id" ref="model_domain_server"/>
+			<field name="type">ir.actions.server</field>
+			<field name="state">code</field>
+			<field name="code">model.get_server_info_ssh()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+		</record>
+
+        <menuitem id="server" name="Server" parent="domain_root" sequence="1" action="domain_server_action"/>
+    </data>
+</odoo>

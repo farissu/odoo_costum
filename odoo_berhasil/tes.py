@@ -19,7 +19,7 @@ def send_telegram_message(bot_token, chat_id, text):
         print("Gagal mengirim pesan ke Telegram.")
 
 bot_token = '6304039480:AAHxyNNvJTYcAj9q33yHenOcqxq7eHIfp1w'
-chat_id = '6359202222'
+chat_id = '-626240205'
 
 # Fungsi untuk mengambil data penyimpanan (disk) dan RAM dari server melalui SSH key
 # Fungsi untuk mengambil informasi sistem dari server melalui SSH key
@@ -99,20 +99,68 @@ def get_server_info_ssh(hostname, port, username, password):
         # ... kode lanjutan untuk pengolahan informasi disk dan pengiriman pesan Telegram ...
 
         # Susun pesan untuk dikirim ke Telegram
-        message = f"{name_Server}\n" \
-                  f"Platform processor: {platform_processor}\n" \
-                  f"System yang digunakan: {system_info}\n" \
-                  f"\n"\
-                  f"RAM total (GB): {total_ram:.2f}\n" \
-                  f"RAM used (GB): {used_ram:.2f}\n" \
-                  f"RAM percent : {ram_percent:.2f} %\n" \
-                  f"\n"\
-                  f"DISK total (GB): {total_disk:.2f} \n" \
-                  f"DISK used (GB): {used_disk:.2f}\n" \
-                  f"DISK percent : {disk_percent:.2f} % \n" 
+        if ram_percent >= 80 and disk_percent >=80:
+            message = f"{name_Server}\n" \
+                    f"\n"\
+                    f"PERINGATAN RAM LEBIH DARI 80% !!!\n"\
+                    f"PERINGATAN DISK LEBIH DARI 80% !!!\n"\
+                    f"\n"\
+                    f"RAM total (GB): {total_ram:.2f}\n" \
+                    f"RAM used (GB): {used_ram:.2f}\n" \
+                    f"RAM percent : {ram_percent:.2f} %\n" \
+                    f"cc @Krisna"\
+                    f"\n"\
+                    f"DISK total (GB): {total_disk:.2f} \n" \
+                    f"DISK used (GB): {used_disk:.2f}\n" \
+                    f"DISK percent : {disk_percent:.2f} % \n"\
+                    f"cc @Krisna"\
+            
+            send_telegram_message(bot_token, chat_id, message)       
 
-        # Kirim pesan ke Telegram
-        send_telegram_message(bot_token, chat_id, message)
+        elif ram_percent >= 80 and disk_percent <=80:
+            message = f"{name_Server}\n" \
+                    f"\n"\
+                    f"PERINGATAN RAM LEBIH DARI 80% !!!\n"\
+                    f"\n"\
+                    f"RAM total (GB): {total_ram:.2f}\n" \
+                    f"RAM used (GB): {used_ram:.2f}\n" \
+                    f"RAM percent : {ram_percent:.2f} %\n" \
+                    f"cc @Krisna"\
+                    f"\n"\
+                    f"DISK total (GB): {total_disk:.2f} \n" \
+                    f"DISK used (GB): {used_disk:.2f}\n" \
+                    f"DISK percent : {disk_percent:.2f} % \n" 
+            send_telegram_message(bot_token, chat_id, message)
+
+        elif ram_percent <= 80 and disk_percent >=80:
+            message = f"{name_Server}\n" \
+                    f"\n"\
+                    f"PERINGATAN DISK LEBIH DARI 80% !!!\n"\
+                    f"\n"\
+                    f"RAM total (GB): {total_ram:.2f}\n" \
+                    f"RAM used (GB): {used_ram:.2f}\n" \
+                    f"RAM percent : {ram_percent:.2f} %\n" \
+                    f"\n"\
+                    f"DISK total (GB): {total_disk:.2f} \n" \
+                    f"DISK used (GB): {used_disk:.2f}\n" \
+                    f"DISK percent : {disk_percent:.2f} % \n"\
+                    f"cc @Krisna"
+            
+            send_telegram_message(bot_token, chat_id, message)
+
+        else :
+            message = f"{name_Server}\n" \
+                    f"\n"\
+                    f"RAM total (GB): {total_ram:.2f}\n" \
+                    f"RAM used (GB): {used_ram:.2f}\n" \
+                    f"RAM percent : {ram_percent:.2f} %\n" \
+                    f"\n"\
+                    f"DISK total (GB): {total_disk:.2f} \n" \
+                    f"DISK used (GB): {used_disk:.2f}\n" \
+                    f"DISK percent : {disk_percent:.2f} % \n" \
+
+            # Kirim pesan ke Telegram
+            send_telegram_message(bot_token, chat_id, message)
 
     except Exception as e:
         print(f"Error: {e}")
@@ -121,10 +169,10 @@ def get_server_info_ssh(hostname, port, username, password):
 
 if __name__ == "__main__":
     # Ganti dengan informasi koneksi SSH ke server Anda
-    hostname = "ag.cnt.id"
-    name_Server = "SERVER AG"
-    username = "root"
-    port = 2023
-    password = "totalitastanpabatas"
+    hostname = "farissu"
+    name_Server = "farissu AG"
+    username = "farissu"
+    port = 22
+    password = "farissu"
 
     get_server_info_ssh(hostname, port, username, password)

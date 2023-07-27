@@ -1,0 +1,43 @@
+<odoo>
+	<data>
+		<record id="domain_report_form" model="ir.ui.view">
+			<field name="name">report_form</field>
+			<field name="model">domain.report</field>
+			<field name="arch" type="xml">
+				<form create="false">
+					<sheet>
+						<group>
+							<field name="sub_domain_id" string="Sub Domain Name" />
+                            <field name="down" string="Time Down"/>
+                            <field name="start" string="Time Up"/>
+							<field name="time_down" string="Estimasi Down"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="domain_report_tree" model="ir.ui.view">
+			<field name="name">report_tree</field>
+			<field name="model">domain.report</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="sub_domain_id" string="Sub Domain Name" />
+                    <field name="down" string="Time Down"/>
+                    <field name="start" string="Time Up"/>
+					<field name="time_down" string="Estimasi Down"/>
+					<!-- <field name="state" string="Status" optional="show" widget="badge" decoration-success="state == 'OK'" decoration-danger="state == 'DOWN'"/> -->
+				</tree>
+			</field>
+		</record>
+		
+		<record id="domain_report_action" model="ir.actions.act_window">
+			<field name="name">Report</field>
+			<field name="res_model">domain.report</field>
+			<field name="view_mode">tree,form,graph,pivot</field>
+			<field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('domain_report_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('domain_report_form')})]" />
+		</record>
+		<menuitem id="report" name="Report" parent="domain_root" sequence="2" action="domain_report_action" />
+	</data>
+</odoo>

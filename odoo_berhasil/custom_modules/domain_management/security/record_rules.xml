@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record model="ir.rule" id="record_not_shared_multi_company_rule_domain_main">
+            <field name="name">Non Shared Records:domain.main</field>
+            <field name="model_id" ref="domain_management.model_domain_main"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record model="ir.rule" id="record_not_shared_multi_company_rule_domain_subdomain">
+            <field name="name">Non Shared Records:domain.subdomain</field>
+            <field name="model_id" ref="domain_management.model_domain_subdomain"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record model="ir.rule" id="record_not_shared_multi_company_rule_domain_report">
+            <field name="name">Non Shared Records:domain.report</field>
+            <field name="model_id" ref="domain_management.model_domain_report"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record model="ir.rule" id="record_not_shared_multi_company_rule_domain_management">
+            <field name="name">Non Shared Records:domain.management</field>
+            <field name="model_id" ref="domain_management.model_domain_management"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+        <record model="ir.rule" id="record_not_shared_multi_company_rule_domain_bot">
+            <field name="name">Non Shared Records:domain.bot</field>
+            <field name="model_id" ref="domain_management.model_domain_bot"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>
