@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_domain_main,access_domain_main,model_domain_main,base.group_user,1,1,1,1
-access_domain_subdomain,access_domain_subdomain,model_domain_subdomain,base.group_user,1,1,1,1
-access_domain_report,access_domain_report,model_domain_report,base.group_user,1,1,1,1
-access_domain_management,access_domain_management,model_domain_management,base.group_user,1,1,1,1
-access_domain_bot,access_domain_bot,model_domain_bot,base.group_user,1,1,1,1
-access_domain_ownership,access_domain_ownership,model_domain_ownership,base.group_user,1,1,1,1

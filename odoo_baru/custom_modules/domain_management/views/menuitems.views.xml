@@ -1,6 +1,0 @@
-<odoo>
-    <data>
-        <menuitem id="domain_root" name="Domain" sequence="1"/>
-        <menuitem id="domain_config" name="Config" parent="domain_root" sequence="3"/>
-    </data>
-</odoo>
